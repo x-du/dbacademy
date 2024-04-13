@@ -87,7 +87,8 @@ class PipelinesApi(ApiContainer):
                          min_workers: int = 0,
                          max_workers: int = 0,
                          photon: bool = True,
-                         pipeline_id: Optional[str] = None):
+                         pipeline_id: Optional[str] = None,
+                         catalog: Optional[str] = None):
 
         params = self.to_dict(name=name,
                               storage=storage,
