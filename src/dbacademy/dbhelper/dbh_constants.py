@@ -70,12 +70,17 @@ class ClustersHelperConstants:
     @property
     def POLICY_DLT_ONLY(self) -> str:
         return "DBAcademy DLT"
+    
+    @property
+    def POLICY_DLT_UC(self) -> str:
+        return "DBAcademy DLT UC"
 
     @property
     def POLICIES(self) -> List[str]:
         return [self.POLICY_ALL_PURPOSE,
                 self.POLICY_JOBS_ONLY,
-                self.POLICY_DLT_ONLY]
+                self.POLICY_DLT_ONLY,
+                self.POLICY_DLT_UC]
 
     @property
     def POOL_DEFAULT_NAME(self) -> str:
