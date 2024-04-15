@@ -12,7 +12,8 @@ class CourseConfig:
                  install_min_time: str,
                  install_max_time: str,
                  supported_dbrs: Union[str, List[str]],
-                 expected_dbrs: str):
+                 expected_dbrs: str,
+                 data_source_name: Optional[str] = None):
         """
         The CourseConfig encapsulates those parameters that should never change for the entire duration of a course
         compared to the LessonConfig which encapsulates parameters that may change from lesson to lesson
@@ -30,7 +31,7 @@ class CourseConfig:
         self.__course_code = validate(course_code=course_code).required.str()
         self.__course_name = validate(course_name=course_name).required.str()
         self.__build_name = CourseConfig.to_build_name(self.course_name)
-
+        self.__data_source_name = validate(data_source_name=data_source_name).optional.str()
         self.__data_source_version = validate(data_source_version=data_source_version).required.str()
 
         self.__install_min_time = validate(install_min_time=install_min_time).required.str()
@@ -96,7 +97,10 @@ class CourseConfig:
         This is assumed to be the same as build_name
         :return: the name of the dataset in the data repository.
         """
-        return self.__build_name
+        if self.__data_source_name == None:
+            return self.__build_name
+        else:
+            return self.__data_source_name
 
     @property
     def data_source_version(self) -> str:
