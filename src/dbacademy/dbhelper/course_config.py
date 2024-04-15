@@ -13,7 +13,7 @@ class CourseConfig:
                  install_max_time: str,
                  supported_dbrs: Union[str, List[str]],
                  expected_dbrs: str, 
-                 data_source_name: Optional[str] = None):
+                 data_source_name: Optional[str] = None): 
         """
         The CourseConfig encapsulates those parameters that should never change for the entire duration of a course
         compared to the LessonConfig which encapsulates parameters that may change from lesson to lesson
