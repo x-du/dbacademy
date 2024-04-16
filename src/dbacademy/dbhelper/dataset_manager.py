@@ -23,7 +23,8 @@ class DatasetManager:
                               _archives_path=da.paths.archives,
                               _install_path=install_path,
                               _install_min_time=da.course_config.install_min_time,
-                              _install_max_time=da.course_config.install_max_time)
+                              _install_max_time=da.course_config.install_max_time,
+                              remote_files=da.course_config.remote_files)
 
     def __init__(self, *,
                  _data_source_uri: str,
@@ -32,7 +33,8 @@ class DatasetManager:
                  _archives_path: Optional[str],
                  _install_path: str,
                  _install_min_time: Optional[str],
-                 _install_max_time: Optional[str]):
+                 _install_max_time: Optional[str],
+                 remote_files: List[str]):
         """
         Creates an instance of DatasetManager
         :param _data_source_uri: See DBAcademy.data_source_uri
@@ -44,7 +46,7 @@ class DatasetManager:
         self.__fixes = 0
         self.__repaired_paths = list()
 
-        self.__remote_files = ["/archive.zip"]
+        self.__remote_files = remote_files
         self.__data_source_uri = _data_source_uri
         self.__staging_source_uri = _staging_source_uri
 
@@ -55,6 +57,10 @@ class DatasetManager:
         self.__install_min_time = _install_min_time
         self.__install_max_time = _install_max_time
 
+    @property
+    def remote_files(self) -> List[str]:
+        return self.__remote_files
+    
     @property
     def datasets_path(self) -> str:
         return self.__datasets_path

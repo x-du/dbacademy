@@ -13,7 +13,8 @@ class CourseConfig:
                  install_max_time: str,
                  supported_dbrs: Union[str, List[str]],
                  expected_dbrs: str, 
-                 data_source_name: str = None): 
+                 data_source_name: str = None,
+                 remote_files: List[str] = None): 
         """
         The CourseConfig encapsulates those parameters that should never change for the entire duration of a course
         compared to the LessonConfig which encapsulates parameters that may change from lesson to lesson
@@ -33,7 +34,7 @@ class CourseConfig:
         self.__build_name = CourseConfig.to_build_name(self.course_name)
         self.__data_source_name = validate(data_source_name=data_source_name).optional.str()
         self.__data_source_version = validate(data_source_version=data_source_version).required.str()
-
+        self.__remote_files = validate(remote_files = remote_files).optional.list()
         self.__install_min_time = validate(install_min_time=install_min_time).required.str()
         self.__install_max_time = validate(install_max_time=install_max_time).required.str()
 
@@ -122,6 +123,17 @@ class CourseConfig:
         :return: the maximum amount of time required to "install" a dataset as measured from, for example, Singapore - typically 2 or 3 times that of CourseConfig.install_min_time
         """
         return self.__install_max_time
+    
+    @property
+    def remote_files(self) -> List[str]:
+        """
+        Used in validating the dataset within the consumer's workspace without having to hit external cloud storage.
+        See also DBAcademy.validate_datasets
+        See also DevHelper.enumerate_remote_datasets (DA.dev.enumerate_remote_datasets)
+        See also DevHelper.enumerate_local_datasets (DA.dev.enumerate_local_datasets)
+        :return: The enumerated list of files that makes up the course's dataset.
+        """
+        return self.__remote_files
 
     @property
     def supported_dbrs(self) -> List[str]:
