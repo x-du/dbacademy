@@ -34,7 +34,7 @@ class CourseConfig:
         self.__build_name = CourseConfig.to_build_name(self.course_name)
         self.__data_source_name = validate(data_source_name=data_source_name).optional.str()
         self.__data_source_version = validate(data_source_version=data_source_version).required.str()
-        self.__remote_files = validate(remote_files = remote_files).optional.list()
+        self.__remote_files = validate(remote_files = remote_files).optional.list(str)
         self.__install_min_time = validate(install_min_time=install_min_time).required.str()
         self.__install_max_time = validate(install_max_time=install_max_time).required.str()
 
