@@ -26,7 +26,7 @@ class WorkspaceCleaner:
         status = self._stop_all_streams() or status
 
         if self.__da.lesson_config.enable_ml_support:
-            status = self._drop_feature_store_tables(lesson_only=True) or status
+            # status = self._drop_feature_store_tables(lesson_only=True) or status
             status = self._cleanup_mlflow_endpoints(lesson_only=True) or status
             status = self._cleanup_mlflow_models(lesson_only=True) or status
             status = self._cleanup_experiments(lesson_only=True) or status
